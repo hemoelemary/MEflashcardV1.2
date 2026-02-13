@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block body %}
+<style>
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+  </style>
+
+
+  <div class="container py-5">
+    <!-- Profile Card -->
+    <div class="card shadow-sm mb-4">
+      <div class="card-body text-center">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnwMwEGBubzTwKhnib-ppZH4i8Oul7pniqAQ&s" alt="Profile Picture" class="profile-pic mb-3">
+        {% for i in fet%} 
+        <h4 class="card-title">{{i[1]}}</h4>
+        <p class="card-text mb-1"><strong>Email:</strong>{{i[2]}}</p>
+        <p class="card-text"><strong>ID:</strong>{{i[0]}}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Flashcard Section -->
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        Add a Flashcard
+      </div>
+      <div class="card-body">
+        <form method="POST" action="/saveflash">
+          {{form.hidden_tag()}}
+          <div class="mb-3">
+          {{form.subject.label(class='form-label')}}{{form.subject(class='form-control')}}
+          </div>
+          <div class="mb-3">
+            {{form.title.label(class='form-label')}}{{form.title(class='form-control')}}
+          </div>
+          <div class="mb-3">
+                        {{form.question.label(class='form-label')}}{{form.question(class='form-control',rows="4" ,placeholder="Enter Question")}}
+          </div>
+          <div class="mb-3">
+                        {{form.answer.label(class='form-label')}}{{form.answer(class='form-control' ,rows="4", placeholder="Enter Answer")}}
+          </div>
+          {{form.sub(class="btn btn-success w-100")}}
+        </form>
+      </div>
+    </div>
+    <br>
+  </div>
+{% endblock %}

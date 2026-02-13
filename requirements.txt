@@ -1,0 +1,4 @@
+flask
+gunicorn
+wtform
+flask_wtf

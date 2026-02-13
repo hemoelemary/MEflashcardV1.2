@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block body %}
+<style>
+/* Define keyframes for color animation, using CSS variables for dynamic colors */
+@keyframes colorChange {
+  0% { background-color: var(--start-color); }
+  25% { background-color: var(--end-color); }
+  50% { background-color: var(--start-color); }
+  75% { background-color: var(--end-color); }
+  100% { background-color: var(--start-color); }
+}
+</style>
+
+<div class="container my-4">
+  <div class="row g-4">
+    <!-- Card 1 -->
+    <div class="container py-4">
+      <h2 class="text-center mb-4">Your Subjects</h2>
+      <strong style="text-align: center;">User:{{fet[0][1]}} <br>email:{{fet[0][2]}}</strong>
+      <div class="row g-4 justify-content-center">
+        {% for i in cards %}
+        {% set color = i[1] if i[1] else '#ccc' %}
+        <!-- fallback color -->
+        <div class="col-md-4">
+          <div class="card h-100 text-center" style="
+            --start-color: {{ color }};
+            --end-color: ##f0f0f0; 
+            animation: colorChange 10s infinite alternate;
+            background-color: var(--start-color);
+            transition: background-color 1s ease;">
+            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+              <h3>{{ i[0] }}</h3>
+              <div style="font-size: 3rem;"></div>
+              <a href="/see/{{fet[0][1]}}/{{i[0]}}" class="btn btn-primary mt-3">See your cards</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

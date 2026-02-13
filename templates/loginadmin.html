@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+<form class="form" method="POST">
+{{ad.hidden_tag()}}
+{{ad.name.label(class='form-label')}}{{ad.name(class='form-control')}}
+{{ad.password.label(class='form-label')}}{{ad.password(class='form-control')}}
+{{ad.sub()}}
+</form>
+
+{% endblock %}
