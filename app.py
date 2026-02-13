@@ -157,7 +157,7 @@ def erx(r):
         <strong>جاري الاصلاح</strong>
     </small>
     """
-    return render_template("error.html",msg=msg) 
+    return msg
 
 @app.errorhandler(500)
 def internal_server_error(error):
@@ -169,10 +169,11 @@ def internal_server_error(error):
         <strong>جاري الاصلاح</strong>
     </small>
     """
-    return render_template("error.html",msg=msg) 
+    return msg
 if __name__ == '__main__':
     init_db()
     port = int(os.environ.get("PORT", 5000))
 
     app.run(host="0.0.0.0", port=port)
+
 
