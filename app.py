@@ -11,7 +11,7 @@ def init_db():
     db = sqlite3.connect("flash.db")
     cur = db.cursor()
     cur.execute("CREATE table if not exists flash(id INTEGER PRIMARY KEY,name text,email text,password text)")
-    cur.execute("CREATE table if not exists cards(id INTEGER PRIMARY KEY,title text,question text,answer text,toid integer)")
+    cur.execute("CREATE table if not exists cards(id INTEGER PRIMARY KEY,subject text,color text,title text,question text,answer text,toid integer)")
     db.commit()
     db.close()
 SIGNED=False
@@ -184,6 +184,7 @@ if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
 
     app.run(host="0.0.0.0", port=port)
+
 
 
 
