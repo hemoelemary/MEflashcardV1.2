@@ -95,7 +95,16 @@ def yourcards():
     cur = db.cursor()
     cur.execute("SELECT * from flash WHERE email=? and password=?",(email,password))
     fet = cur.fetchall()
-    cur.execute("SELECT subject,color from cards WHERE toid=?",(fet[0][0],))
+    cur.execute("""
+    SELECT subject, color
+    FROM (
+        SELECT subject, color,
+               ROW_NUMBER() OVER (PARTITION BY subject ORDER BY color) as rn
+        FROM cards
+        WHERE toid=?
+    ) sub
+    WHERE rn=1
+""", (fet[0][0],))
     yourcards = cur.fetchall()
     print(yourcards[0][1])
     db.close()
@@ -175,5 +184,6 @@ if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
 
     app.run(host="0.0.0.0", port=port)
+
 
 
